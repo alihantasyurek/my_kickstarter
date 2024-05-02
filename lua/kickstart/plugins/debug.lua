@@ -24,51 +24,16 @@ return {
 		-- Add your own debuggers here
 		"leoluz/nvim-dap-go",
 	},
+
 	config = function()
 		local dap = require("dap")
-		dap.configurations.cpp = {
-			{
-				name = "Launch w/ args",
-				type = "codelldb",
-				request = "launch",
-				program = function()
-					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/")
-				end,
-				cwd = function()
-					return vim.fn.getcwd()
-				end,
-				stopOnEntry = false,
-				args = {},
-
-				--local dap = require("dap")
-				-- dap.adapters.codelldb = {
-				-- 	type = "executable",
-				-- 	command = "~/.local/share/nvim/mason/bin/codelld", -- adjust as needed, must be absolute path
-				-- 	name = "codelldb",
-				-- }
-
-				--local dap = require("dap")
-
-				-- 💀
-				-- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
-				--
-				--    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
-				--
-				-- Otherwise you might get the following error:
-				--
-				--    Error on launch: Failed to attach to the target process
-				--
-				-- But you should be aware of the implications:
-				-- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
-				-- runInTerminal = false,
-			},
-		}
 		local dapui = require("dapui")
 
 		require("mason-nvim-dap").setup({
 			-- Makes a best effort to setup the various debuggers with
 			-- reasonable debug configurations
 			automatic_setup = true,
+			automatic_installation = true,
 
 			-- You can provide additional configuration to the handlers,
 			-- see mason-nvim-dap README for more information
@@ -86,7 +51,6 @@ return {
 			"DapBreakpoint",
 			{ text = "⦿", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
 		)
-
 		-- Basic debugging keymaps, feel free to change to your liking!
 		vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debug: Start/Continue" })
 		vim.keymap.set("n", "<F1>", dap.step_into, { desc = "Debug: Step Into" })
@@ -121,7 +85,6 @@ return {
 
 		-- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
 		vim.keymap.set("n", "<F7>", dapui.toggle, { desc = "Debug: See last session result." })
-
 		dap.listeners.after.event_initialized["dapui_config"] = dapui.open
 		dap.listeners.before.event_terminated["dapui_config"] = dapui.close
 		dap.listeners.before.event_exited["dapui_config"] = dapui.close
