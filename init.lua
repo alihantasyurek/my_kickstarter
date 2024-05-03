@@ -932,7 +932,7 @@ require("lazy").setup({
 vim.keymap.set(
 	"n",
 	"<leader>rc",
-	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+	[[:%s/\<<C-r<C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
 	{ desc = "Replace the word that you're on" }
 )
 
@@ -942,10 +942,20 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy the word to th
 vim.keymap.set("n", "<leader>Y", [[_"+Y]], { desc = "Copy the line to the clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete the word to the void register" })
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+vim.keymap.set("x", "<leader>p", [["_dP]])
 
 --quickfix list navigation
 vim.keymap.set("n", "<leader>j", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>cprev<CR>zz")
 --might need to move further down in order them to work properly
--- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
+-- vim.keymap.set("n", "<leaer>k", "<cmd>lnext<CR>zz")
 -- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+
+vim.keymap.set("n", "<C-n>", ":bnext<CR>")
+vim.keymap.set("n", "<C-p>", ":bprevious<CR>")
+vim.keymap.set("n", "<C-x>", ":bdelete<CR>")
+--
+--""","I personally use <leader>
+-- vim.keymap.set("n", "<leader>n", ":bnext<CR>")
+-- vim.keymap.set("n", "<leader>p", ":bprevious<CR>")
+-- vim.keymap.set("n", "<leader>d", ":bdelete<CR>")
