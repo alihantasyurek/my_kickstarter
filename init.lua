@@ -1,10 +1,16 @@
+-- Set <space> as the leader key
+-- See `:help mapleader`
+--  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 
@@ -22,13 +28,13 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 --make it executable
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+-- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 vim.keymap.set(
 	"n",
-	"<C-m>",
+	"<leader>m",
 	"<cmd>cd %:h<CR><cmd>compiler c++<CR><cmd>silent make<CR>:lua if #vim.fn.getqflist() > 0 then vim.cmd('copen') else vim.cmd('cclose') end<CR>",
-	{ noremap = true, silent = true }
+	{ noremap = true, silent = true, desc = "Compile C++ code" }
 )
 
 vim.api.nvim_create_autocmd("BufEnter", {
@@ -129,12 +135,6 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
 
@@ -219,7 +219,8 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+-- vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set("t", "<C-n><C-n>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -953,9 +954,4 @@ vim.keymap.set("n", "<leader>k", "<cmd>cprev<CR>zz")
 
 vim.keymap.set("n", "<C-n>", ":bnext<CR>")
 vim.keymap.set("n", "<C-p>", ":bprevious<CR>")
-vim.keymap.set("n", "<C-x>", ":bdelete<CR>")
---
---""","I personally use <leader>
--- vim.keymap.set("n", "<leader>n", ":bnext<CR>")
--- vim.keymap.set("n", "<leader>p", ":bprevious<CR>")
--- vim.keymap.set("n", "<leader>d", ":bdelete<CR>")
+vim.keymap.set("n", "<C-s>", ":bdelete<CR>")
