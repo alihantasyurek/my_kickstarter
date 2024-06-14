@@ -954,4 +954,5 @@ vim.keymap.set("n", "<leader>k", "<cmd>cprev<CR>zz")
 
 vim.keymap.set("n", "<C-n>", ":bnext<CR>")
 vim.keymap.set("n", "<C-p>", ":bprevious<CR>")
-vim.keymap.set("n", "<C-s>", "<cmd>silent :w | %bd | e#<CR>")
+vim.keymap.set("n", "<C-x>", ":bdelete<CR>")
+vim.keymap.set("n", "<C-s>", "<cmd>silent :w | %bd! | e#<CR>")
